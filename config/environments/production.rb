@@ -1,4 +1,8 @@
 Rails.application.configure do
+  server "(御自身のEC2のIPアドレス)", user: "ec2-user", roles: %w{app db web}
+
+  set :rails_env, "production"
+  set :unicorn_rack_env, "production"
   # Settings specified here will take precedence over those in config/application.rb.
 
   # Code is not reloaded between requests.
