@@ -4,14 +4,14 @@ FactoryBot.define do
     title { 'test_title' }
     content { 'test_content' }
     status { '未着手' }
-    deadline { '2100-12-31' }
+    deadline { '2100-12-29' }
     priority { '普通' }
   end
   factory :second_task, class:Task do
     title { 'test_title2' }
     content { 'test_content2' }
     status { '未着手' }
-    deadline { '2100-12-31' }
+    deadline { '2100-12-30' }
     priority { '普通' }
   end
   factory :third_task, class:Task do

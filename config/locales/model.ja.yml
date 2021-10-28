@@ -1,0 +1,17 @@
+ja:
+  activerecord:
+    models:
+      task: 作業
+      # user: ユーザー
+    attributes:
+      task:
+        title: タイトル
+        content: 内容
+        status: 進行状態
+        deadline: 締め切り
+        priority: 優先度
+      # user:
+      #   name: 名前
+      #   email: メールアドレス
+      #   password: パスワード
+      #   password_confirmation: 確認用パスワード
