@@ -4,12 +4,22 @@
     <title>ManyoApp</title>
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
-
-    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
-    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+    <meta name="viewport" content="width=device-width">
+    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track':true %>
+    <%= javascript_include_tag 'application', 'data-turbolinks-track':true %>
   </head>
 
   <body>
+    <header>
+      <ul>
+        <li><a href="#">Manyo_App</a></li>
+        <li><a href="#">Task_list</a></li>
+      </ul>
+    </header>
     <%= yield %>
+    <footer>
+      <p>WEF2109 金成柱</p>
+      <p>manyo_app</p>
+    </footer>
   </body>
 </html>
