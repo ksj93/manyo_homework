@@ -1,9 +1,26 @@
 class TasksController < ApplicationController
   before_action :set_task, only: %i[ show edit update destroy ]
-
+  PER = 8
   # GET /tasks or /tasks.json
   def index
-    @tasks = Task.all.order(created_at:"DESC")
+    @tasks = Task.all
+    @tasks = Task.page(params[:page]).per(PER)
+    if params[:title].present? && params[:status].present?
+      @tasks = @tasks.search_title(params[:title]).search_status(params[:status])
+    elsif params[:title].present?
+      @tasks = @tasks.search_title(params[:title])
+    elsif params[:status].present?
+      @tasks = @tasks.search_status(params[:status])
+    end
+
+    if params[:sort_deadline]
+      @tasks = @tasks.order(deadline:"DESC")
+    elsif params[:sort_priority]
+      @tasks = @tasks.order(priority:"DESC")
+    else
+      @tasks=@tasks.order(created_at:"DESC")
+    end
+
   end
 
   # GET /tasks/1 or /tasks/1.json

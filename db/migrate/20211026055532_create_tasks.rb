@@ -6,7 +6,7 @@ class CreateTasks < ActiveRecord::Migration[5.2]
       t.string :status, null:false
       t.date :deadline, null:false
       # ,dafault:Time.now.strftime("%Y-%m-%d")
-      t.string :priority, null:false
+      t.integer :priority, default:0 ,null:false
 
       t.timestamps
     end
