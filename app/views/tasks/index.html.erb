@@ -26,6 +26,7 @@
     <table class ="list">
       <thead class="list_menu">
         <tr>
+          <th>User Name</th>
           <th>Title</th>
           <th>Content</th>
           <th>Status</th>
@@ -39,6 +40,7 @@
       <tbody>
         <% @tasks.each do |task| %>
           <tr>
+            <td><%= task.user.name %></td>
             <td><%= task.title %></td>
             <td><%= task.content %></td>
             <td class = status_text><%= task.status %></td>

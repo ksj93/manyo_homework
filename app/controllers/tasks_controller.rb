@@ -3,8 +3,8 @@ class TasksController < ApplicationController
   PER = 8
   # GET /tasks or /tasks.json
   def index
-    @tasks = Task.all
-    @tasks = Task.page(params[:page]).per(PER)
+    # @tasks = current_user.tasks.all
+    @tasks = current_user.tasks.page(params[:page]).per(PER)
     if params[:title].present? && params[:status].present?
       @tasks = @tasks.search_title(params[:title]).search_status(params[:status])
     elsif params[:title].present?
@@ -39,7 +39,7 @@ class TasksController < ApplicationController
   # POST /tasks or /tasks.json
   def create
     @task = Task.new(task_params)
-
+    @task.user_id = current_user.id
     respond_to do |format|
       if @task.save
         format.html { redirect_to @task, notice: "Task was successfully created." }
