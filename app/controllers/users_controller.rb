@@ -14,16 +14,36 @@ class UsersController < ApplicationController
 
   end
   def create
-    if current_user.authority ==1
-      @user =User.new(user_params)
-      if User.find_by(params[:eamil]).email != User.new(params.require(:user).permit(:email)).email
-        if @user.save
-          redirect_to admin_users_path
+    if current_user.present?
+      if current_user.authority ==1
+        @user =User.new(user_params)
+        if User.find_by(params[:eamil]).email != User.new(params.require(:user).permit(:email)).email
+          if @user.save
+            redirect_to admin_users_path
+          else
+            render:new
+          end
         else
           render:new
         end
       else
-        render:new
+        @user =User.new(user_params)
+        if User.count >0
+          if User.find_by(params[:eamil]).email != User.new(params.require(:user).permit(:email)).email
+            if @user.save
+              session[:user_id] = @user.id
+              redirect_to user_path(@user.id)
+            else
+              render:new
+            end
+          else
+            render:new
+          end
+        else
+          @user.save
+          session[:user_id] = @user.id
+          redirect_to user_path(@user.id)
+        end
       end
     else
       @user =User.new(user_params)
