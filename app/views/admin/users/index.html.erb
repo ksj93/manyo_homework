@@ -29,6 +29,8 @@
       <% if user.authority !=1 %>
         <td><%= link_to "appoint admin", admin_users_path(appoint_admin: "true",id:user.id,authority:1),data: { confirm: 'Are you sure?' }%></td>
         <!-- 後にもっと見る -->
+      <% elsif user.authority ==1 &&current_user.id != user.id %>
+        <td><%= link_to "disappoint admin", admin_users_path(appoint_admin: "true",id:user.id,authority:0),data: { confirm: 'Are you sure?' }%></td>
       <% end %>
     </tr>
     <% end %>

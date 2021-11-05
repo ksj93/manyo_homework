@@ -9,7 +9,7 @@ class Admin::UsersController < ApplicationController
       # 後にもっと見る
       # binding.irb
       redirect_to admin_users_path
-
+      
     else
 
     end

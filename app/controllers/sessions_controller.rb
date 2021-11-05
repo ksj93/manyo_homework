@@ -1,6 +1,11 @@
 class SessionsController < ApplicationController
   skip_before_action :login_required, only: [:new, :create]
   def new
+    if session[:user_id].present?
+      redirect_to tasks_path
+    else
+
+    end
   end
   def create
     user = User.find_by(email: params[:session][:email].downcase)
