@@ -36,6 +36,11 @@
     <%= form.select :priority,[["普通","普通"],["高い","高い"],["低い","低い"]] %>
   </div>
 
+  <div class="field">
+  <p><%= form.label :label %><p>
+    <a id="checkbox">[<%= form.collection_check_boxes(:label_ids, Label.all, :id, :tag) %>]</a>
+  </div>
+
   <div class="actions">
     <%= form.submit %>
   </div>

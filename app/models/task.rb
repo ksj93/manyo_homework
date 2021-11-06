@@ -11,4 +11,6 @@ class Task < ApplicationRecord
   scope :search_title,->(title_search){where("title LIKE?","%#{title_search}%")}
   scope :search_status,->(status_search){where(status:"#{status_search}")}
   belongs_to:user
+  has_many :labellings, dependent: :destroy
+  has_many :labels, through: :labellings, source: :label
 end
