@@ -5,12 +5,27 @@ class TasksController < ApplicationController
   def index
     # @tasks = current_user.tasks.all
     @tasks = current_user.tasks.page(params[:page]).per(PER)
-    if params[:title].present? && params[:status].present?
+
+    if params[:title].present? && params[:status].present? && params[:label_id].present?
+      @tasks = @tasks.search_title(params[:title]).search_status(params[:status]).joins(:labels).where(labels: { id: params[:label_id] })
+
+    elsif params[:title].present? && params[:status].present?
       @tasks = @tasks.search_title(params[:title]).search_status(params[:status])
+
+    elsif params[:title].present? && params[:label_id].present?
+      @tasks = @tasks.search_title(params[:title]).joins(:labels).where(labels: { id: params[:label_id] })
+
+    elsif params[:status].present? && params[:label_id].present?
+      @tasks = @tasks.search_status(params[:status]).joins(:labels).where(labels: { id: params[:label_id] })
+
     elsif params[:title].present?
       @tasks = @tasks.search_title(params[:title])
+
     elsif params[:status].present?
       @tasks = @tasks.search_status(params[:status])
+
+    elsif params[:label_id].present?
+      @tasks = @tasks.joins(:labels).where(labels: { id: params[:label_id] })
     end
 
     if params[:sort_deadline]
@@ -81,6 +96,6 @@ class TasksController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def task_params
-      params.require(:task).permit(:title, :content, :status, :deadline, :priority)
+      params.require(:task).permit(:title, :content, :status, :deadline, :priority, { label_ids: [] })
     end
 end

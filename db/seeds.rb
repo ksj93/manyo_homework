@@ -7,20 +7,19 @@
 #   Character.create(name: 'Luke', movie: movies.first)
 User.create!(
    email: 'test@test.com',
-   name: 'テスト太郎',
+   name: 'admin',
    password: '12345',
    authority: 1
 )
-5.times do |n|
+10.times do |n|
   User.create!(
     email: "test#{n + 1}@test.com",
     name: "test_user#{n + 1}",
     password: '12345',
-    # authority: 0
   )
 end
-5.times do |m|
-  5.times do |n|
+10.times do |m|
+  10.times do |n|
     Task.create!(
       title:"test_task#{n+1}",
       content:"test#{n+1}",
@@ -31,3 +30,15 @@ end
     )
   end
 end
+Label.create!(tag:"Ruby on Rails")
+Label.create!(tag:"JavaScript")
+Label.create!(tag:"Ruby")
+Label.create!(tag:"Django")
+Label.create!(tag:"pyhton")
+Label.create!(tag:"C")
+Label.create!(tag:"C+")
+Label.create!(tag:"C#")
+Label.create!(tag:"Java")
+Label.create!(tag:"HTML")
+Label.create!(tag:"node.js")
+Label.create!(tag:"vue.js")
